@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YNU Ph.D. Students Weekly Seminar</title>
+  <meta name="description" content="Informal weekly seminar by Ph.D. students in graph theory at Yokohama National University. Next session, schedule, archive, and members." />
+  <!-- Tailwind (CDN) for quick styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"}
+    .muted{color:#64748b}
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <!-- Nav -->
+  <header class="bg-white/90 backdrop-blur border-b border-slate-200 sticky top-0 z-10">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+      <h1 class="text-xl sm:text-2xl font-bold">YNU Ph.D. Students Weekly Seminar</h1>
+      <nav class="text-sm space-x-4">
+        <a href="#next" class="hover:underline">Next</a>
+        <a href="#schedule" class="hover:underline">Upcoming</a>
+        <a href="#archive" class="hover:underline">Archive</a>
+        <a href="#members" class="hover:underline">Members</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+    <!-- About -->
+    <section id="about" class="rounded-2xl bg-white border border-slate-200 p-6">
+      <h2 class="text-xl font-semibold">About</h2>
+      <p class="mt-2">
+        This is an informal weekly seminar run by Ph.D. students in graph theory at Yokohama National University.
+        We share ongoing work, discuss research progress, and present our latest results in a friendly, collaborative setting.
+        Our goals are to practice clear communication, exchange constructive feedback, foster collaborations, and generate new ideas to advance our research.
+        We usually hold it at the following time and place.
+      </p>
+      <ul class="mt-4 text-sm leading-6">
+        <li><span class="font-semibold">Time:</span> Thursdays, <b>3PM~</b> (JST)</li>
+        <li><span class="font-semibold">Place:</span> Room 611, S3-4 Building, Yokohama National University</li>
+      </ul>
+    </section>
+
+    <!-- Announcement (optional) -->
+    <section id="announcement" class="hidden">
+      <div class="rounded-2xl bg-amber-50 border border-amber-200 p-4">
+        <p class="text-amber-900" id="announcementText"></p>
+      </div>
+    </section>
+
+    <!-- Next Seminar -->
+    <section id="next" class="rounded-2xl bg-white border border-slate-200 p-6">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-semibold">Next Seminar</h2>
+        </div>
+        <a id="icsLink" href="#" download
+           class="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50">
+        </a>
+      </div>
+
+      <!-- Date / Time / Place -->
+      <div class="mt-5 grid md:grid-cols-3 gap-6">
+        <div class="space-y-2">
+          <div class="text-xs uppercase tracking-wide text-slate-500">Date</div>
+          <div class="text-lg font-semibold" id="nextDate">—</div>
+        </div>
+        <div class="space-y-2">
+          <div class="text-xs uppercase tracking-wide text-slate-500">Time (JST)</div>
+          <div class="text-lg font-semibold" id="nextTime">—</div>
+        </div>
+        <div class="space-y-2">
+          <div class="text-xs uppercase tracking-wide text-slate-500">Place</div>
+          <div class="text-lg font-semibold" id="nextPlace">—</div>
+        </div>
+      </div>
+
+      <!-- Talks: Speaker (1st line) + Title (2nd line) -->
+      <div class="mt-5">
+        <div class="text-xs uppercase tracking-wide text-slate-500">Speakers &amp; Title</div>
+        <ul id="nextTalks" class="mt-2 pl-0 space-y-3"></ul>
+      </div>
+    </section>
+
+    <!-- Upcoming -->
+    <section id="schedule">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xl font-semibold">Upcoming Schedule</h2>
+      </div>
+      <div id="upcomingList" class="mt-3 grid sm:grid-cols-2 gap-3"></div>
+    </section>
+
+    <!-- Archive -->
+    <section id="archive">
+      <h2 class="text-xl font-semibold">Archive</h2>
+      <div id="pastList" class="mt-3 grid sm:grid-cols-2 gap-3"></div>
+    </section>
+
+    <!-- Members -->
+    <section id="members" class="rounded-2xl bg-white border border-slate-200 p-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xl font-semibold">Members</h2>
+        <span class="text-sm muted" id="membersCount"></span>
+      </div>
+      <div id="membersGrid" class="mt-4 grid sm:grid-cols-2 gap-3"></div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="hidden">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h3 class="font-semibold">Contact</h3>
+          <p class="text-sm text-slate-600">ozeki-kenta-xr@ynu.ac.jp</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="mailto:seminar@example.edu?subject=Seminar%20Presentation%20Proposal"
+             class="rounded-xl border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50">Propose a Talk</a>
+          <a href="#" class="rounded-xl border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50">Subscribe (Google Calendar)</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center text-sm text-slate-500 py-8">
+    © Ph.D. Students Weekly Seminar (YNU)
+  </footer>
+
+  <script>
+    // ========= EDIT YOUR SCHEDULE HERE =========
+    // You can write start as '15:00' or '15:00~'. No 'end' needed.
+    const seminars = [
+      {
+        date: '2025-10-23', start: '15:00~',
+        place: 'Room 611 (S3-4 Building, YNU)',
+        speakers: [
+          { name: 'Baoleer', title: 'Edge-Disjoint Hamilton Cycles in Line Graphs' }
+        ]
+      },
+      {
+        date: '2025-10-30', start: '15:00~',
+        place: 'Room 611 (S3-4 Building, YNU)',
+        speakers: [
+          { name: 'Gang Yang', title: 'TBA' }
+        ]
+      },
+      {
+        date: '2025-11-06', start: '15:00~',
+        place: 'Room 611 (S3-4 Building, YNU)',
+        speakers: [
+          { name: 'TBA', title: 'TBA' }
+        ]
+      }
+    ];
+
+    // ========= EDIT MEMBERS HERE =========
+    const members = [
+      { name: 'Leilei Zhang', role: 'PD (Ozeki Kenta Lab.)' },
+      { name: 'Baoleer', role: 'Ph.D. Student (Ozeki Kenta Lab.)'},
+      { name: 'Gang Yang', role: 'Ph.D. Student (Ozeki Kenta Lab.)' },
+      { name: 'Márton Marits', role: 'Ph.D. Student (Ozeki Kenta Lab.)' }
+    ];
+
+    // ========= UTILITIES =========
+    const DEFAULT_DURATION_MIN = 60; // for calendar + auto-archive only
+
+    function sanitizeTimeStr(t){
+      return String(t||'').replace(/[^\d:]/g,'');
+    }
+    function parseLocal(dateStr, timeStr){
+      const clean = sanitizeTimeStr(timeStr);
+      return new Date(`${dateStr}T${clean||'00:00'}:00`);
+    }
+    function addMinutes(date, minutes){
+      const d = new Date(date);
+      d.setMinutes(d.getMinutes() + minutes);
+      return d;
+    }
+    function fmtDate(d){
+      return new Intl.DateTimeFormat('en-GB', { weekday:'short', year:'numeric', month:'short', day:'numeric'}).format(d);
+    }
+    function to12h(date){
+      let h = date.getHours();
+      const m = date.getMinutes();
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12; if (h === 0) h = 12;
+      const mm = m === 0 ? '' : ':' + String(m).padStart(2,'0');
+      return `${h}${mm}${ampm}`;
+    }
+    function toHHMM(date){
+      const h = String(date.getHours()).padStart(2,'0');
+      const m = String(date.getMinutes()).padStart(2,'0');
+      return `${h}:${m}`;
+    }
+    function icsData(ev){
+      const startDate = parseLocal(ev.date, ev.start);
+      const endStr = ev.end ? sanitizeTimeStr(ev.end) : toHHMM(addMinutes(startDate, DEFAULT_DURATION_MIN));
+      const uid = `${ev.date}-${sanitizeTimeStr(ev.start)}@ynu-phd-seminar`;
+      const dtstart = ev.date.replaceAll('-', '') + sanitizeTimeStr(ev.start).replace(':','') + '00';
+      const dtend   = ev.date.replaceAll('-', '') + endStr.replace(':','') + '00';
+      const desc = `Speakers: ${ev.speakers.map(s=>s.name + ' — ' + s.title).join('; ')}\nZoom: ${ev.zoom||'TBA'}`;
+      const ics = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//YNU PhD Seminar//EN
+BEGIN:VEVENT
+UID:${uid}
+DTSTAMP:${dtstart}Z
+DTSTART:${dtstart}
+DTEND:${dtend}
+SUMMARY:YNU Ph.D. Students Weekly Seminar
+LOCATION:${ev.place}
+DESCRIPTION:${desc}
+END:VEVENT
+END:VCALENDAR`;
+      return 'data:text/calendar;charset=utf8,' + encodeURIComponent(ics);
+    }
+
+    // ========= RENDER =========
+    function render(){
+      seminars.sort((a,b)=> a.date.localeCompare(b.date));
+      const now = new Date();
+      const withDates = seminars.map(ev => {
+        const startDate = parseLocal(ev.date, ev.start);
+        const endDate = ev.end ? parseLocal(ev.date, ev.end) : addMinutes(startDate, DEFAULT_DURATION_MIN);
+        return { ...ev, startDate, endDate };
+      });
+      const upcoming = withDates.filter(ev => ev.endDate >= now);
+      const past     = withDates.filter(ev => ev.endDate <  now).reverse();
+
+      // Next
+      const next = upcoming[0] || withDates[withDates.length-1];
+      if(next){
+        document.getElementById('icsLink').href = icsData(next);
+        document.getElementById('nextDate').textContent = fmtDate(next.startDate);
+        document.getElementById('nextTime').textContent = `${to12h(next.startDate)}~ (JST)`;
+        document.getElementById('nextPlace').textContent = next.place;
+
+        const talksUl = document.getElementById('nextTalks');
+        talksUl.innerHTML = '';
+        next.speakers.forEach(s => {
+          const li = document.createElement('li');
+          li.className = "list-none";
+          li.innerHTML = `
+            <div class="font-medium">${s.name}</div>
+            <div class="text-slate-600">${s.title || 'Title TBA'}</div>
+          `;
+          talksUl.appendChild(li);
+        });
+      }
+
+      // Upcoming
+      const upWrap = document.getElementById('upcomingList'); 
+      upWrap.innerHTML = '';
+      upcoming.forEach(ev=>{
+        const card = document.createElement('div');
+        card.className = 'bg-white border border-slate-200 rounded-xl p-4';
+        const talksHtml = ev.speakers.map(s=>`
+          <li class="list-none mt-2">
+            <div class="font-medium">${s.name}</div>
+            <div class="text-slate-600">${s.title || 'Title TBA'}</div>
+          </li>
+        `).join('');
+        card.innerHTML = `
+          <div class="text-xs uppercase tracking-wide text-slate-500">${fmtDate(ev.startDate)}</div>
+          <div class="mt-1 font-semibold">Time: ${to12h(ev.startDate)}~ (JST)</div>
+          <div class="text-sm mt-1">Place: ${ev.place}</div>
+          <ul class="mt-2 pl-0">${talksHtml}</ul>
+        `;
+        upWrap.appendChild(card);
+      });
+
+      // Archive
+      const pastWrap = document.getElementById('pastList'); pastWrap.innerHTML = '';
+      past.forEach(ev=>{
+        const card = document.createElement('div');
+        card.className = 'bg-white border border-slate-200 rounded-xl p-4';
+        card.innerHTML = `
+          <div class="text-xs uppercase tracking-wide text-slate-500"> ${fmtDate(ev.startDate)} </div>
+          <div class="mt-1 font-semibold">${ev.place}</div>
+          <div class="mt-2 text-sm">${ev.speakers.map(s=>`<div><b>${s.name}</b> — ${s.title}</div>`).join('')}</div>
+        `;
+        pastWrap.appendChild(card);
+      });
+
+      // Members
+      const mWrap = document.getElementById('membersGrid');
+      const mCount = document.getElementById('membersCount');
+      mWrap.innerHTML = '';
+      if (Array.isArray(members) && members.length){
+        mCount.textContent = `${members.length} member${members.length>1?'s':''}`;
+        members.forEach(m=>{
+          const card = document.createElement('div');
+          card.className = 'bg-white border border-slate-200 rounded-xl p-4';
+          const email = m.email ? `<a class="text-indigo-600 hover:underline" href="mailto:${m.email}">${m.email}</a>` : '';
+          const home  = m.homepage ? `<a class="text-indigo-600 hover:underline" href="${m.homepage}" target="_blank" rel="noreferrer noopener">Homepage</a>` : '';
+          const links = [email, home].filter(Boolean).join(' · ');
+          card.innerHTML = `
+            <div class="text-lg font-semibold">${m.name}</div>
+            <div class="text-sm text-slate-600">${m.role || ''}</div>
+            ${links ? `<div class="mt-2 text-sm">${links}</div>` : ''}
+          `;
+          mWrap.appendChild(card);
+        });
+      }else{
+        mCount.textContent = 'No members listed';
+        mWrap.innerHTML = `<div class="text-sm text-slate-600">No members yet. Please edit <code>const members</code> in the script.</div>`;
+      }
+    }
+
+    render();
+  </script>
+
+  <!-- Manual Archive (add-only) -->
+  <script>
+    // 手动维护的 Archive 项（可选）
+    const archived = [
+      {
+        date: '2025-10-16 3PM~',
+        place: 'Room 611 (S3-4 Building, YNU)',
+        speakers: [
+          { name: 'Márton Marits', title: 'Fractional chromatic number, Kneser graphs, and graph covering' }
+        ]
+      }
+    ];
+
+    (function appendArchived(){
+      const pastWrap = document.getElementById('pastList');
+      if (!pastWrap || !Array.isArray(archived) || !archived.length) return;
+      const toDateOnly = (str) => {
+        const m = String(str||'').match(/\d{4}-\d{2}-\d{2}/);
+        return m ? m[0] : '';
+      };
+      const fmt = (d) => d
+        ? new Intl.DateTimeFormat('en-GB', {weekday:'short', year:'numeric', month:'short', day:'numeric'}).format(new Date(d+'T00:00:00'))
+        : '';
+
+      archived.forEach(ev=>{
+        const card = document.createElement('div');
+        card.className = 'bg-white border border-slate-200 rounded-xl p-4';
+        const dateOnly = toDateOnly(ev.date);
+        card.innerHTML = `
+          <div class="text-xs uppercase tracking-wide text-slate-500">${fmt(dateOnly)}</div>
+          <div class="mt-1 font-semibold">${ev.place || ''}</div>
+          <div class="mt-2 text-sm">
+            ${(ev.speakers||[]).map(s=>`<div><b>${s.name||''}</b> — ${s.title||''}</div>`).join('')}
+          </div>
+        `;
+        pastWrap.appendChild(card);
+      });
+    })();
+  </script>
+</body>
+</html>
